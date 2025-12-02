@@ -1,0 +1,242 @@
+/* --------------------------
+   1) CSS reset / sensible defaults
+--------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+
+/* File: public/assets/css/base.css
+   Dark theme v2 — lighter surfaces, calmer accent, cleaner rhythm */
+
+/* ===== Tokens ===== */
+:root{
+  color-scheme: dark;
+
+  /* Surfaces */
+  --so-bg:        #0e1116;    /* page */
+  --so-surface:   #151a21;    /* cards/nav */
+  --so-elevated:  #1b212b;    /* list items, modals */
+  --so-line:      #2a3340;    /* borders/dividers */
+
+  /* Text */
+  --so-text:        #E6EAF2;  /* primary */
+  --so-text-muted:  #9AA6B2;  /* secondary */
+
+  /* Accent (calmer blue) */
+  --so-primary-400: #7aa2ff;
+  --so-primary-500: #6a92ff;
+  --so-primary-600: #5987ff;
+
+  /* Status */
+  --so-success: #34d399;
+  --so-warning: #fbbf24;
+  --so-danger:  #ef4444;
+  --so-info:    #38bdf8;
+
+  /* Aesthetics */
+  --so-radius: 12px;
+  --so-card-radius: 16px;
+  --so-shadow: 0 6px 24px rgba(0,0,0,.35);
+
+  /* Map to Bootstrap so built-ins follow theme */
+  --bs-body-bg: var(--so-bg);
+  --bs-body-color: var(--so-text);
+  --bs-border-color: var(--so-line);
+  --bs-primary: var(--so-primary-500);
+  --bs-success: var(--so-success);
+  --bs-warning: var(--so-warning);
+  --bs-danger:  var(--so-danger);
+  --bs-info:    var(--so-info);
+  
+}
+
+/* ===== Global ===== */
+html,body{
+  background: var(--so-bg);
+  color: var(--so-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+main.container > *:first-child { margin-top: 0; }
+
+main.container > * { margin-bottom: var(--space-4); }
+
+.page-title { margin-top: 0; }
+
+/* Space & rhythm */
+.container{ max-width: 1120px; }
+main.container{ padding-top: 20px; padding-bottom: 40px; }
+
+/* ===== Nav ===== */
+.navbar{
+  background: var(--so-surface) !important;
+  border-bottom: 1px solid var(--so-line);
+}
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .navbar-text{ color: var(--so-text) !important; }
+.navbar .nav-link:hover{ color: var(--so-primary-400) !important; }
+
+/* Search box in nav */
+.navbar .form-control{
+  background: #3e4e6e;
+  border: 1px solid var(--so-line);
+  color: var(--so-text);
+  border-radius: 10px;
+}
+.navbar .btn{ border-radius: 10px; }
+
+/* ===== Cards / blocks ===== */
+.card, .dropdown-menu, .list-group, .so-card{
+  background: var(--so-surface) !important;
+  color: var(--so-text);
+  border: 1px solid var(--so-line);
+  border-radius: var(--so-card-radius);
+  box-shadow: var(--so-shadow);
+}
+
+.card .card-body{ padding: 18px 20px; }
+
+/* Elevated list (your “Latest questions” stack) */
+.list-group-item{
+  background: var(--so-elevated);
+  color: var(--so-text);
+  border-color: var(--so-line);
+  padding: 14px 18px;
+}
+.list-group-item:hover{
+  background: #112c54;
+}
+
+/* ===== Tables ===== */
+.table{
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--so-text);
+  --bs-table-striped-bg: rgba(255,255,255,.03);
+  --bs-table-hover-bg: rgba(255,255,255,.06);
+  border-color: var(--so-line);
+}
+
+/* ===== Forms ===== */
+.form-control, .form-select, textarea, .form-check-input{
+  background: #101724;
+  color: var(--so-text);
+  border: 1px solid var(--so-line);
+  border-radius: var(--so-radius);
+}
+.form-control::placeholder{ color: var(--so-text-muted); }
+.form-text, .text-muted{ color: var(--so-text-muted) !important; }
+input[readonly], .form-control:disabled{
+  background: #223356;
+  color: var(--so-text-muted);
+}
+
+/* ===== Buttons ===== */
+.btn{ border-radius: 10px; }
+
+.btn-primary{
+  background: var(--so-primary-500);
+  border-color: var(--so-primary-500);
+}
+.btn-primary:hover{
+  background: var(--so-primary-600);
+  border-color: var(--so-primary-600);
+}
+
+.btn-outline-primary{
+  color: var(--so-primary-500);
+  border-color: var(--so-primary-500);
+}
+.btn-outline-primary:hover{
+  color: #fff;
+  background: var(--so-primary-500);
+  border-color: var(--so-primary-500);
+}
+
+.btn-outline-secondary{
+  color: var(--so-text);
+  border-color: var(--so-line);
+}
+.btn-outline-secondary:hover{
+  background: rgba(255,255,255,.07);
+}
+
+/* No underline on hover/focus for links that look like buttons */
+a.btn,
+a.btn:hover,
+a.btn:focus,
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  text-decoration: none !important;
+}
+
+/* If you used the link-style button, it underlines by design — turn it off */
+.btn-link,
+.btn-link:hover,
+.btn-link:focus {
+  text-decoration: none !important;
+}
+
+
+/* ===== Alerts / badges ===== */
+.alert{
+  color: var(--so-text);
+  border-color: var(--so-line);
+  background: rgba(255,255,255,.04);
+}
+.alert-info    { background: rgba(56,189,248,.10); }
+.alert-success { background: rgba(52,211,153,.12); }
+.alert-warning { background: rgba(251,191,36,.12); }
+.alert-danger  { background: rgba(239,68,68,.12); }
+
+.badge.text-bg-success{ background: rgba(52,211,153,.18) !important; color: #9ef3cf !important; }
+.badge.text-bg-secondary{ background: rgba(154,166,178,.18) !important; color: #cfd7df !important; }
+
+/* ===== Links / focus ===== */
+a{ color: var(--so-primary-500); text-decoration: none; }
+a:hover{ color: var(--so-primary-600); text-decoration: underline; }
+:focus-visible{ outline: 3px solid rgba(122,162,255,.28); outline-offset: 2px; }
+
+/* ===== Dividers / footer ===== */
+hr, .border, .border-top, .border-bottom, .border-start, .border-end{
+  border-color: var(--so-line) !important;
+}
+footer{ color: var(--so-text-muted); }
+
+input[type="file"].form-control {
+  background-color: var(--so-surface-2) !important;
+  color: var(--so-text-1) !important;
+  border-color: var(--so-border) !important;
+}
+
+/* Standard browsers */
+input[type="file"].form-control::file-selector-button {
+  background-color: var(--so-surface-3) !important;
+  color: var(--so-text-1) !important;
+  border: 1px solid var(--so-border) !important;
+  padding: .45rem .75rem;
+  margin-right: .75rem;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+/* WebKit fallback (Chrome/Safari) */
+input[type="file"].form-control::-webkit-file-upload-button {
+  background-color: var(--so-surface-3) !important;
+  color: var(--so-text-1) !important;
+  border: 1px solid var(--so-border) !important;
+  padding: .45rem .75rem;
+  margin-right: .75rem;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+/* Optional hover */
+input[type="file"].form-control::file-selector-button:hover,
+input[type="file"].form-control::-webkit-file-upload-button:hover {
+  background-color: var(--so-primary-600) !important;
+  border-color: var(--so-primary-600) !important;
+  color: #fff !important;
+}

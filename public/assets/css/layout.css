@@ -1,0 +1,28 @@
+/* Navbar tweaks (keep Bootstrap structure, improve feel) */
+.navbar {
+  box-shadow: var(--shadow-1);
+}
+
+/* Page section headers */
+.page-title {
+  font-size: var(--fs-24);
+  font-weight: 600;
+  margin: 0 0 var(--space-4);
+}
+
+/* Standard card spacing */
+.so-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-1);
+}
+
+/* Footer minimal spacing */
+.so-footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  padding: var(--space-6) 0;
+  font-size: var(--fs-14);
+}

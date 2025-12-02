@@ -1,0 +1,49 @@
+/* Buttons (keep Bootstrap classes; add subtle refinements) */
+.btn {
+  border-radius: calc(var(--radius) - 6px);
+}
+
+/* Accent buttons */
+.btn-primary {
+  background-color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+.btn-primary:hover {
+  background-color: var(--brand-600);
+  border-color: var(--brand-600);
+}
+
+/* Outline variants */
+.btn-outline-primary {
+  color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+
+/* Badges */
+.badge {
+  border-radius: 999px;
+}
+
+/* Forms */
+.form-control, .form-select, textarea {
+  border-radius: calc(var(--radius) - 8px);
+}
+
+/* Cards used on posts list/details */
+.post-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card);
+}
+.post-card__body { padding: var(--space-4); }
+.post-card__meta { color: var(--muted); font-size: var(--fs-12); }
+
+/* Tiny utilities for spacing */
+.mt-6 { margin-top: var(--space-6) !important; }
+.mb-6 { margin-bottom: var(--space-6) !important; }

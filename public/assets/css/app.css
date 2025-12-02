@@ -1,0 +1,8 @@
+/* Logo sizing & alignment */
+.so-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 6px; /* optional, matches your rounded UI */
+}
+.navbar-brand { display: flex; align-items: center; gap: .5rem; }
