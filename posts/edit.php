@@ -8,7 +8,7 @@ require_once __DIR__ . '/../lib/media.php';
 $postId = (int)($_GET['id'] ?? 0);
 if ($postId <= 0) { http_response_code(404); exit('Post not found'); }
 
-/* ---------- helpers (logic-only; keep behavior identical) ---------- */
+/* ---------- helpers  -------- */
 function normalize_filename(string $name): string {
   $base = preg_replace('/[^a-zA-Z0-9._-]/', '_', basename($name));
   return time() . '_' . $base;
@@ -114,3 +114,4 @@ render('posts/edit.html.php', [
   'mods'       => $mods,
   'thumb'      => $thumb,
 ]);
+
