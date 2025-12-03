@@ -1,20 +1,18 @@
 <?php
-// header partial; assumes auth helpers + base_url() available via layout/bootstrap
+// header partial
 $base = base_url();
 $isLoggedIn = isset($_SESSION['user_id']);
 $isAdmin    = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 $username   = $_SESSION['username'] ?? 'Guest';
 
-// Optional: search suggestions passed in from controller for <datalist>
 $searchOptions = $searchOptions ?? [];
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
 
-    <!-- Brand with logo (works in dark and light mode via prefers-color-scheme) -->
+    <!-- Brand with logo  -->
     <a class="navbar-brand d-flex align-items-center gap-2" href="<?= $base ?>/public/index.php" style="text-decoration:none">
       <picture>
-        <!-- Light mode version (optional file) -->
         <source srcset="<?= $base ?>/public/assets/img/logo-light.png" media="(prefers-color-scheme: light)">
         <!-- Default / dark mode -->
         <img
@@ -84,3 +82,4 @@ $searchOptions = $searchOptions ?? [];
     </div>
   </div>
 </nav>
+
