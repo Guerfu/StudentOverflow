@@ -1,5 +1,5 @@
 <?php
-// users/delete.php — reassign content to "deleted_account" (no schema changes required)
+// users/delete.php 
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../lib/media.php'; // base_url()
@@ -36,7 +36,7 @@ if (($user['role'] ?? '') === 'admin') {
 $pdo->beginTransaction();
 
 try {
-    // 1) Ensure there is a "deleted_account" user (no special columns required)
+    // Ensure there is a "deleted_account" user (no special columns required)
     $find = $pdo->prepare("SELECT id FROM users WHERE LOWER(username) = 'deleted_account' LIMIT 1");
     $find->execute();
     $deletedId = $find->fetchColumn();
@@ -46,8 +46,6 @@ try {
         $email  = 'deleted@local.invalid'; // guaranteed non-deliverable
         $hash   = password_hash(bin2hex(random_bytes(8)), PASSWORD_DEFAULT);
 
-        // Role can be 'admin' or 'student'; it doesn't matter for content ownership.
-        // We'll set it to 'admin' to avoid any hidden UI restrictions if needed.
         $ins = $pdo->prepare("
             INSERT INTO users (username, email, password_hash, role)
             VALUES (:u, :e, :h, 'admin')
@@ -64,7 +62,6 @@ try {
         redirect_to(base_url() . '/users/index.php');
     }
 
-    // 2) Reassign authored content to "deleted_account" BEFORE deletion
     // Comment out any line that doesn't match your schema.
     $updates = [
         // authored entities
@@ -74,7 +71,6 @@ try {
         "UPDATE post_upvotes     SET user_id       = :to WHERE user_id       = :uid",
         "UPDATE comment_likes    SET user_id       = :to WHERE user_id       = :uid",
         "UPDATE comment_kudos    SET giver_user_id = :to WHERE giver_user_id = :uid",
-        // If you want to anonymise contact history, do it here (left untouched by default)
         // e.g. "UPDATE contact_messages SET email = CONCAT('deleted+', :uid, '@local.invalid') WHERE email = :oldEmail"
     ];
 
@@ -90,7 +86,6 @@ try {
     $pdo->commit();
 } catch (Throwable $e) {
     $pdo->rollBack();
-    // Optional: log $e->getMessage() in development
 }
 
 redirect_to(base_url() . '/users/index.php');
