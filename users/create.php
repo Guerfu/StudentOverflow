@@ -10,9 +10,6 @@ auth_require_admin();
 $errors = [];
 $username = $email = '';
 
-// NOTE: This project expects a `password` column (VARCHAR) on `users` for authentication.
-// Run: ALTER TABLE users ADD COLUMN password VARCHAR(255) NULL; then set a password for existing users.
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = trim($_POST['username'] ?? '');
   $email    = trim($_POST['email'] ?? '');
@@ -41,3 +38,4 @@ render('users/create.html.php', [
   'username'=> $username,
   'email'   => $email,
 ]);
+
