@@ -10,7 +10,7 @@ if (!auth_user_id()) {
   exit;
 }
 
-/* ---------- helpers (logic-only; keep behavior identical) ---------- */
+/* ---------- helpers ---------- */
 function normalize_filename(string $name): string {
   $base = preg_replace('/[^a-zA-Z0-9._-]/', '_', basename($name));
   return time() . '_' . $base;
@@ -83,3 +83,4 @@ render('posts/create.html.php', [
   'module_id' => $module_id,
   'mods'      => $mods,
 ]);
+
