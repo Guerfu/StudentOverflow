@@ -1,7 +1,6 @@
 <?php
 // public/contact.php (controller)
 
-// --- Try teacher-style PHPMailer first, then vendor ---
 if (file_exists(__DIR__ . '/PHPMailer/src/PHPMailer.php')) {
   require __DIR__ . '/PHPMailer/src/PHPMailer.php';
   require __DIR__ . '/PHPMailer/src/SMTP.php';
@@ -31,7 +30,7 @@ foreach ([$root . '/mail_config.php', $root . '/config/mail_config.php'] as $cfg
 $ADMIN_EMAIL = 'hauntgcc240106@gmail.com';
 $ADMIN_NAME  = 'Site Administrator';
 
-// --- Helper: get current user email from session or DB ---
+// --- Helper---
 $senderEmail = $_SESSION['email'] ?? null;
 if (!$senderEmail && ($uid = auth_user_id())) {
   $q = $pdo->prepare("SELECT email FROM users WHERE id = :id");
@@ -94,7 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->addAddress($mailCfg['to_email'], $mailCfg['to_name']);    // admin recipient
         $mail->addReplyTo($senderEmail, $name);                           // student's email from account
 
-        // Optional: keep a site-controlled envelope sender (Return-Path) for better deliverability
         if (!empty($mailCfg['from_email'])) {
           $mail->Sender = $mailCfg['from_email']; // some MTAs use this as envelope-from
         }
@@ -127,3 +125,4 @@ render('public/contact.html.php', [
   'subject'     => $subject,
   'message'     => $message,
 ]);
+
