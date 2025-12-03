@@ -75,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if ($reg_pass === '') $regErrs[] = 'Password is required.';
       if ($reg_pass !== $reg_pass2) $regErrs[] = 'Passwords do not match.';
 
-      // Optional: simple length constraints
       if ($reg_username !== '' && mb_strlen($reg_username) > 50) $regErrs[] = 'Username must be 50 characters or fewer.';
       if ($reg_email !== '' && mb_strlen($reg_email) > 120) $regErrs[] = 'Email must be 120 characters or fewer.';
 
@@ -124,3 +123,4 @@ render('users/login.html.php', [
   'reg_username'     => $reg_username,
   'reg_email'        => $reg_email,
 ]);
+
