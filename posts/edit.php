@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $dest = $uploadsDir . '/' . $fileName;
 
       if (move_uploaded_file($_FILES['image']['tmp_name'], $dest)) {
-        // remove existing DB rows (we keep only one "first" image for now)
+        // remove existing DB rows
         $pdo->prepare("DELETE FROM post_images WHERE post_id = :p")->execute([':p' => $postId]);
         $pdo->prepare("INSERT INTO post_images (post_id, file_name) VALUES (:p,:f)")
             ->execute([':p'=>$postId, ':f'=>$fileName]);
@@ -114,4 +114,5 @@ render('posts/edit.html.php', [
   'mods'       => $mods,
   'thumb'      => $thumb,
 ]);
+
 
