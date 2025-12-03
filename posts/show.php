@@ -10,7 +10,7 @@ if ($postId <= 0) { http_response_code(404); exit('Post not found'); }
 
 $uid = auth_user_id();
 
-// Fetch post (with first image, upvotes, and viewer's upvote flag)
+// Fetch post 
 $sql = "
   SELECT
     p.id, p.title, p.content, p.created_at, p.user_id, p.module_id,
@@ -38,7 +38,7 @@ if (!$post) { http_response_code(404); exit('Post not found'); }
 
 $isOwner = ($uid && (int)$post['user_id'] === (int)$uid) || auth_is_admin();
 
-// Fetch comments (with like/kudos counts and viewer flags)
+// Fetch comments
 $csql = "
   SELECT
     c.id, c.post_id, c.user_id, c.content, c.created_at,
@@ -60,10 +60,10 @@ $cstmt->execute([
 ]);
 $comments = $cstmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Resolve first image URL now (using lib/media.php helper)
+// Resolve first image URL now 
 $imgUrl = resolve_image_url($post['image_path'] ?? null);
 
-// Render (layout wraps header/footer)
+// Render 
 render('posts/show.html.php', [
   'post'     => $post,
   'uid'      => $uid,
@@ -71,3 +71,4 @@ render('posts/show.html.php', [
   'comments' => $comments,
   'imgUrl'   => $imgUrl,
 ]);
+
