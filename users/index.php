@@ -1,5 +1,5 @@
 <?php
-// users/index.php (controller) — List users + their posts in collapsible rows
+// users/index.php 
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../lib/view.php';
@@ -7,7 +7,7 @@ require_once __DIR__ . '/../lib/media.php';
 
 auth_require_admin(); // only admins
 
-// Get users (same as before)
+// Get users 
 $users = $pdo->query("
   SELECT u.id, u.username, u.email, u.role,
          (SELECT COUNT(*) FROM posts p WHERE p.user_id = u.id) AS post_count
@@ -39,3 +39,4 @@ render('users/index.html.php', [
   'users'       => $users,
   'postsByUser' => $postsByUser,
 ]);
+
